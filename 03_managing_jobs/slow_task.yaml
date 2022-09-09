@@ -1,0 +1,8 @@
+# slow_task.yaml
+name: slowtask
+
+run: |
+  for i in {1..3600}; do
+    echo "Time elapsed since start: $i"
+    sleep 1
+  done

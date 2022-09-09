@@ -1,0 +1,10 @@
+# example.yaml
+name: example
+
+setup: |
+  echo "Run any setup commands here"
+  sudo apt install cowsay
+
+run: |
+  echo "Hello Stranger"
+  cowsay "Moo!"
