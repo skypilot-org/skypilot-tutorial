@@ -1,9 +1,8 @@
 FROM continuumio/miniconda3:4.12.0
 
-# Clone repo and install dependencies
-COPY . /skypilot-tutorial
-
 WORKDIR /skypilot-tutorial
+
+ADD ./requirements.txt /skypilot-tutorial/requirements.txt
 
 # Install tutorial dependencies
 RUN pip install -r requirements.txt
@@ -15,8 +14,15 @@ RUN conda install -c conda-forge google-cloud-sdk && \
     pip install skypilot[aws,gcp] && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy credentials
-COPY src/.aws /root/.aws
-COPY src/.config/gcloud /root/.config/gcloud
+# Copy credentials.
+# UPDATE - no longer required. Instead mount the .aws and .config dirs to /credentials and it will be copied over.
+# COPY src/.aws /root/.aws
+# COPY src/.config/gcloud /root/.config/gcloud
 
-CMD jupyter lab --no-browser --ip "*" --allow-root --notebook-dir=/skypilot-tutorial --NotebookApp.token='' --NotebookApp.password=''
+# Add files which may change frequently
+COPY . /skypilot-tutorial
+
+# Set bash as default shell
+ENV SHELL /bin/bash
+
+CMD ["/bin/bash", "-c", "cp -a /credentials/. /root/;jupyter lab --no-browser --ip '*' --allow-root --notebook-dir=/skypilot-tutorial --NotebookApp.token='' --NotebookApp.password=''"]

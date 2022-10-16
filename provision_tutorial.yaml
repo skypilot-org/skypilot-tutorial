@@ -1,7 +1,0 @@
-# Launch the skypilot tutorial on 2 VMs
-
-resources:
-  cloud: aws
-
-setup: |
-  

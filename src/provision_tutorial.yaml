@@ -1,0 +1,22 @@
+# Launch the skypilot tutorial on 2 VMs
+
+resources:
+  cloud: aws
+
+file_mounts:
+  ~/credentials/.aws: ~/.aws
+  ~/credentials/.config/gcloud: ~/.config/gcloud
+
+setup: |
+  git clone https://github.com/skypilot-org/skypilot-tutorial.git
+  cd skypilot-tutorial
+  git checkout skycamp22
+  pip install -r requirements.txt
+  # Install gcloud dependencies
+  sudo conda install -y -c conda-forge google-cloud-sdk
+  pip install google-api-python-client
+  cp -r ~/credentials/.aws ~/.aws/
+  cp -r ~/credentials/.config ~/.config/
+
+run: |
+  jupyter lab --no-browser --ip "*" --allow-root --notebook-dir=skypilot-tutorial --NotebookApp.token='' --NotebookApp.password=''

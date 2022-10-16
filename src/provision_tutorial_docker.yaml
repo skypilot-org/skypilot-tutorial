@@ -1,0 +1,23 @@
+# Launch the SkyCamp tutorial on many VMs
+
+# Cloud and accelerators if required for the tutorial
+resources:
+  cloud: aws
+  # region: us-west-2  # Can customize, defaults to us-east-1
+  # instance_type: m6i.2xlarge   # Can customize
+
+# Configure the number of nodes to be used here
+num_nodes: 2
+
+# Copy over credentials to the VMs. These should be mounted automatically inside the container you choose to use. See SkyPilot tutorial Dockerfile on how to do this.
+file_mounts:
+  ~/credentials/.aws: ~/.aws
+  ~/credentials/.config/gcloud: ~/.config/gcloud
+
+# Add pulls for your image here
+setup: |
+  docker pull public.ecr.aws/a9w6z7w5/skypilot-tutorial:latest
+
+# Add your image here. Make sure you use a port NOT in use by any other image! Port options: 8888, 8889, 8890.
+run: |
+  docker run -v ~/credentials:/credentials:ro -p 8888:8888 public.ecr.aws/a9w6z7w5/skypilot-tutorial:latest
