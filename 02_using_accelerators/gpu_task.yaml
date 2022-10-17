@@ -1,5 +1,0 @@
-# gpu_task.yaml
-name: gputask
-
-run: |
-  nvidia-smi

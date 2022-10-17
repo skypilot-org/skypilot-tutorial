@@ -1,0 +1,33 @@
+name: bert
+
+resources:
+  accelerators: T4:1
+
+setup: |
+  git clone https://github.com/huggingface/transformers.git
+  cd transformers && git checkout v4.18.0
+  pip install -e .
+  cd examples/pytorch/question-answering/
+  pip install -r requirements.txt
+
+file_mounts:
+  /dataset/:
+    source: s3://sky-bert-dataset/
+
+run: |
+  cd transformers/examples/pytorch/question-answering/
+  python run_qa.py \
+  --train_file /dataset/train-v2.0.json \
+  --model_name_or_path bert-base-uncased \
+  --dataset_name squad \
+  --do_train \
+  --do_eval \
+  --per_device_train_batch_size 12 \
+  --learning_rate 3e-5 \
+  --num_train_epochs 50 \
+  --max_seq_length 384 \
+  --doc_stride 128 \
+  --report_to none \
+  --output_dir /tmp/checkpoints/. \
+  --save_total_limit 10 \
+  --save_steps 1000

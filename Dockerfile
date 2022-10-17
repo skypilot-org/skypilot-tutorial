@@ -19,6 +19,8 @@ RUN conda install -c conda-forge google-cloud-sdk && \
 # COPY src/.aws /root/.aws
 # COPY src/.config/gcloud /root/.config/gcloud
 
+# TODO - Remove usage logging message and hardcode catalog
+
 # Add files which may change frequently
 COPY . /skypilot-tutorial
 
