@@ -1,7 +1,7 @@
 name: bert
 
 resources:
-  accelerators: # Add T4:1 here!
+  accelerators: # Add V100:1 here!
 
 file_mounts:
   /dataset/:
