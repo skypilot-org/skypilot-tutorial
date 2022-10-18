@@ -19,7 +19,8 @@ RUN conda install -c conda-forge google-cloud-sdk && \
 # COPY src/.aws /root/.aws
 # COPY src/.config/gcloud /root/.config/gcloud
 
-# TODO - Remove usage logging message and hardcode catalog
+# Exclude usage logging message
+RUN mkdir -p /root/.sky && touch /root/.sky/privacy_policy
 
 # Add files which may change frequently
 COPY . /skypilot-tutorial
@@ -27,4 +28,4 @@ COPY . /skypilot-tutorial
 # Set bash as default shell
 ENV SHELL /bin/bash
 
-CMD ["/bin/bash", "-c", "cp -a /credentials/. /root/;jupyter lab --no-browser --ip '*' --allow-root --notebook-dir=/skypilot-tutorial --NotebookApp.token='' --NotebookApp.password=''"]
+CMD ["/bin/bash", "-c", "cp -a /credentials/. /root/;sky show-gpus;jupyter lab --no-browser --ip '*' --allow-root --notebook-dir=/skypilot-tutorial --NotebookApp.token='' --NotebookApp.password=''"]

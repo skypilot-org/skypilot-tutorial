@@ -3,10 +3,17 @@ name: bert
 resources:
   accelerators: # Add V100:1 here!
 
-file_mounts:
-  /dataset/:
-    source: s3://sky-bert-dataset/
+  # For this task, we specify cloud and region for quota reasons.
+  # If these are not specified, SkyPilot will try the cheapest region first, and failover if quota is exceeded.
+  cloud: aws
+  region: us-west-2
 
+# file_mounts specifies the any data that must be made available to the task
+file_mounts:
+  /dataset/: # This specifies the destination where the object bucket will be mounted
+    source: s3://sky-bert-dataset/ # The bucket URL to be mounted
+
+# Setup repository.
 setup: |
   git clone https://github.com/huggingface/transformers.git
   cd transformers && git checkout v4.18.0
@@ -14,6 +21,7 @@ setup: |
   cd examples/pytorch/question-answering/
   pip install -r requirements.txt
 
+# Run command. Note that the --train_file argument reads from the object store mounted at /dataset
 run: |
   cd transformers/examples/pytorch/question-answering/
   python run_qa.py \

@@ -1,3 +1,4 @@
+# Helper functions to terminate AWS instances
 import sky
 import subprocess
 import time

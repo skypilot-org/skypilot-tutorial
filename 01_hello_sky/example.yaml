@@ -6,5 +6,5 @@ setup: |
   sudo apt install cowsay
 
 run: |
-  echo "Hello SkyPilot"
+  echo "Hello Stranger!"
   cowsay "Moo!"
