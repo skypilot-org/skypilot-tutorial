@@ -28,4 +28,4 @@ COPY . /skypilot-tutorial
 # Set bash as default shell
 ENV SHELL /bin/bash
 
-CMD ["/bin/bash", "-c", "cp -a /credentials/. /root/;sky show-gpus;jupyter lab --no-browser --ip '*' --allow-root --notebook-dir=/skypilot-tutorial --NotebookApp.token='' --NotebookApp.password=''"]
+CMD ["/bin/bash", "-c", "cp -a /credentials/. /root/;sky show-gpus;jupyter lab --no-browser --ip '*' --allow-root --notebook-dir=/skypilot-tutorial --NotebookApp.token='SkyCamp2022'"]

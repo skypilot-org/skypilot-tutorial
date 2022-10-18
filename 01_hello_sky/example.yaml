@@ -3,7 +3,7 @@ name: example
 
 setup: |
   echo "Run any setup commands here"
-  sudo apt install cowsay
+  pip install cowsay
 
 run: |
   echo "Hello Stranger!"
