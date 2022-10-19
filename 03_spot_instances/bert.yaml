@@ -1,10 +1,7 @@
 name: bert
 
 resources:
-  accelerators: # [DIY] - Add K80:1 here!
-
-  # For this task, we specify cloud and region because our tutorial account has quota only in the us-west-2 region.
-  # If these are not specified, SkyPilot will try the cheapest region first, and failover if quota is exceeded.
+  accelerators: T4:1  # Use T4 GPUs for quota reasons.
   cloud: aws
   region: us-west-2
 
@@ -12,6 +9,7 @@ resources:
 file_mounts:
   /dataset/: # This specifies the destination where the object bucket will be mounted
     source: s3://sky-bert-dataset/ # The bucket URL to be mounted
+
 
 # Setup repository.
 setup: |

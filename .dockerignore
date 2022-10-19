@@ -3,3 +3,5 @@
 build_docker.sh
 Dockerfile
 local/
+README.md
+LICENSE
