@@ -1,0 +1,7 @@
+**/.ipynb_checkpoints
+**/.git
+build_docker.sh
+Dockerfile
+local/
+README.md
+LICENSE
