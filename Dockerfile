@@ -10,8 +10,8 @@ RUN pip install -r requirements.txt
 # Install SkyPilot + dependencies
 RUN conda install -c conda-forge google-cloud-sdk && \
     apt update -y && \
-    apt install rsync nano -y && \
-    pip install skypilot[aws,gcp] && \
+    apt install rsync nano vim -y && \
+    pip install skypilot[gcp,kubernetes] && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy credentials.
@@ -22,10 +22,10 @@ RUN conda install -c conda-forge google-cloud-sdk && \
 # Exclude usage logging message
 RUN mkdir -p /root/.sky && touch /root/.sky/privacy_policy
 
-# Add files which may change frequently
+# Add files which may change frequentl
 COPY . /skypilot-tutorial
 
 # Set bash as default shell
 ENV SHELL /bin/bash
 
-CMD ["/bin/bash", "-c", "cp -a /credentials/. /root/;sky show-gpus;jupyter lab --no-browser --ip '*' --allow-root --notebook-dir=/skypilot-tutorial --NotebookApp.token='SkyCamp2022'"]
+CMD ["/bin/bash", "-c", "cp -a /credentials/. /root/;sky show-gpus;jupyter lab --no-browser --ip '*' --allow-root --notebook-dir=/skypilot-tutorial --NotebookApp.token='SkyCamp2023'"]
